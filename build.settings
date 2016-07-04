@@ -1,0 +1,134 @@
+settings = {
+	orientation = {
+		-- Supported values for orientation: portrait, portraitUpsideDown, landscapeLeft, landscapeRight
+		default = "portrait",
+		content = "portrait",
+		supported = { "portrait", }
+	},
+
+	excludeFiles = {
+		all = { 'assets/*', 'backup/*', '*.keystore', },
+
+		-- Exclude all Android icon files and .ogg files in the "music" directory
+		iphone = { "Icon-*dpi.png", "music/*.ogg" },
+
+		-- Exclude iOS "retina" image files and .m4a files in the "music" directory
+		android = { "Icon.png", "*@2x.png", "music/*.m4a" },
+
+		-- Exclude unnecessary assets from OS X desktop apps
+		osx = { "Default*.png", "Icon*.png", "Icon*.ico", "Icon*.icns" },
+
+		-- Exclude unnecessary assets from Win32 desktop apps
+		win32 = { "Default*.png", "Icon*.png", "Icon*.ico", "Icon*.icns" },
+	},
+
+	-- iOS Section
+	iphone = {
+		plist = {
+			UIStatusBarHidden = false,
+			UIPrerenderedIcon = true,
+			UIApplicationExitsOnSuspend = false,
+
+			CFBundleIconFiles = {
+				"Icon.png",
+				"Icon@2x.png",
+				"Icon-60.png",
+				"Icon-60@2x.png",
+				"Icon-60@3x.png",
+				"Icon-72.png",
+				"Icon-72@2x.png",
+				"Icon-76.png",
+				"Icon-76@2x.png",
+				"Icon-167.png",
+				"Icon-Small-40.png",
+				"Icon-Small-40@2x.png",
+				"Icon-Small-40@3x.png",
+				"Icon-Small-50.png",
+				"Icon-Small-50@2x.png",
+				"Icon-Small.png",
+				"Icon-Small@2x.png",
+				"Icon-Small@3x.png",
+			},
+
+			UILaunchImages = {
+				{  -- iPhone 4 Portrait
+					["UILaunchImageMinimumOSVersion"] = "7.0",
+					["UILaunchImageName"] = "Default",
+					["UILaunchImageOrientation"] = "Portrait",
+					["UILaunchImageSize"] = "{320, 480}"
+				},
+				{  -- iPhone 5 Portrait
+					["UILaunchImageMinimumOSVersion"] = "7.0",
+					["UILaunchImageName"] = "Default-568h",
+					["UILaunchImageOrientation"] = "Portrait",
+					["UILaunchImageSize"] = "{320, 568}"
+				},
+				{  -- iPad Portrait
+					["UILaunchImageMinimumOSVersion"] = "7.0",
+					["UILaunchImageName"] = "Default-Portrait",
+					["UILaunchImageOrientation"] = "Portrait",
+					["UILaunchImageSize"] = "{768, 1024}"
+				},
+				{  -- iPhone 6 Portrait
+					["UILaunchImageMinimumOSVersion"] = "8.0",
+					["UILaunchImageName"] = "Default-667h",
+					["UILaunchImageOrientation"] = "Portrait",
+					["UILaunchImageSize"] = "{375, 667}"
+				},
+				{  -- iPhone 6 Plus Portrait
+					["UILaunchImageMinimumOSVersion"] = "8.0",
+					["UILaunchImageName"] = "Default-736h",
+					["UILaunchImageOrientation"] = "Portrait",
+					["UILaunchImageSize"] = "{414, 736}"
+				},
+				{  -- iPad Pro Portrait
+					["UILaunchImageMinimumOSVersion"] = "9.0",
+					["UILaunchImageName"] = "Default-Portrait-1366",
+					["UILaunchImageOrientation"] = "Portrait",
+					["UILaunchImageSize"] = "{1024, 1366}"
+				},
+			},
+		}
+	},
+
+	-- Android Section
+	android = {
+		versionCode = "100",
+
+		usespermissions = {
+		},
+
+		usesFeatures = {
+			{ name="android.hardware.screen.portrait", required=true },
+		},
+	},
+
+	plugins = {
+	},
+
+	window = {
+		defaultMode = "normal",
+		defaultViewWidth = 480,
+		defaultViewHeight = 720,
+		resizable = false,
+		minViewWidth = 320,
+		minViewHeight = 480,
+		enableCloseButton = true,
+		enableMinimizeButton = true,
+		enableMaximizeButton = false,
+		suspendWhenMinimized = false,
+		showWindowTitle = true,
+
+		titleText = {
+			-- The "default" text will be used if the system is using a language and/or
+			-- country code not defined below. This serves as a fallback mechanism.
+			default = "",
+		},
+	},
+
+	osx = {
+		plist = {
+			NSHumanReadableCopyright = "Copyright © 2016\nQuantumwave Interactive Inc."
+		},
+	},
+}
