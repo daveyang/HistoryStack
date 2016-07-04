@@ -50,6 +50,7 @@ function Roll:redo()
 	-- if there is a need, this will be executed by the HistoryStack
 end
 --]]
+
 ---------------------------------------------------------------------------
 
 return Roll
