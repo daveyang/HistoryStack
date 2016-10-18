@@ -12,7 +12,7 @@ Created by: Dave Yang / Quantumwave Interactive Inc.
 
 Latest code: https://github.com/daveyang/HistoryStack
 
-	Version: 1.0.1
+	Version: 1.0.3
 
 --
 
@@ -66,7 +66,7 @@ end
 ---------------------------------------------------------------------------
 
 -- pop top-most object from undo stack and save it to redo stack
--- return it or nil if nothing to undo
+-- return the object, or nil if nothing to undo
 function HistoryStack:delete()
 	if #self.undos>=1 then
 		local o = self.undos[#self.undos]
@@ -99,6 +99,25 @@ end
 
 ---------------------------------------------------------------------------
 
+-- return the top-most item from stack, or nil if empty stack
+function HistoryStack:getTopItem()
+	local n = #self.undos
+	if n>=1 then
+		return self.undos[n]
+	else
+		return nil
+	end
+end
+
+---------------------------------------------------------------------------
+
+-- return the table containing all items
+function HistoryStack:getAllItems()
+	return self.undos
+end
+
+---------------------------------------------------------------------------
+
 -- return whether the operation is undoable
 function HistoryStack:isUndoable()
 	return #self.undos>=1
@@ -117,9 +136,11 @@ end
 function HistoryStack:undo()
 	local o = self:delete()
 
-	if o~=nil and o.undo~=nil then
+	if o~=nil and type(o)=="table" and o.undo~=nil then
 		o:undo()
 	end
+
+	return o
 end
 
 ---------------------------------------------------------------------------
@@ -132,9 +153,13 @@ function HistoryStack:redo()
 		self.redos[#self.redos] = nil
 		self.undos[#self.undos+1] = o
 
-		if o~=nil and o.redo~=nil then
+		if o~=nil and type(o)=="table" and o.redo~=nil then
 			o:redo()
 		end
+
+		return o
+	else
+		return nil
 	end
 end
 
